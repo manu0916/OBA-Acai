@@ -1,6 +1,6 @@
 # OBA! Açaí — site demonstrativo
 
-Front-end estático, responsivo e pronto para apresentação. O cardápio possui busca, categorias, escolha de tamanho e adicionais, carrinho persistente, checkout pelo WhatsApp e o Tuca como elemento visual animado da marca.
+Front-end estático, responsivo e pronto para apresentação. O cardápio possui busca, categorias, escolha de tamanho e adicionais, carrinho persistente, checkout pelo WhatsApp e aplica a marca e o tucano oficiais da OBA! Açaí.
 
 ## Cloudflare Pages
 

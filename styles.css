@@ -142,38 +142,17 @@ h3,
   text-decoration: none;
 }
 
-.brand-mark {
-  width: 46px;
-  height: 46px;
-  display: grid;
-  place-items: center;
-  color: var(--purple-950);
-  background: var(--orange);
-  border: 3px solid var(--pink);
-  border-radius: 50% 44% 50% 42%;
-  font-family: "Baloo 2", sans-serif;
-  font-size: 1.35rem;
-  font-weight: 800;
-  line-height: 1;
-  transform: rotate(-6deg);
-  box-shadow: 3px 3px 0 var(--yellow);
+.brand-logo {
+  width: 62px;
+  height: 62px;
+  object-fit: contain;
+  filter: drop-shadow(0 6px 10px rgba(15, 1, 18, 0.3));
+  transition: transform 180ms ease;
 }
 
-.brand-copy {
-  display: flex;
-  align-items: baseline;
-  gap: 4px;
-  line-height: 1;
-}
-
-.brand-copy b {
-  font-size: 1.45rem;
-}
-
-.brand-copy small {
-  font-family: "DM Sans", sans-serif;
-  font-size: 0.82rem;
-  font-weight: 600;
+.brand:hover .brand-logo,
+.brand:focus-visible .brand-logo {
+  transform: rotate(-4deg) scale(1.04);
 }
 
 .main-nav {
@@ -981,6 +960,14 @@ h3,
   gap: 14px;
 }
 
+.footer-logo {
+  width: 66px;
+  height: 66px;
+  flex: 0 0 auto;
+  object-fit: contain;
+  filter: drop-shadow(0 8px 12px rgba(0, 0, 0, 0.24));
+}
+
 .footer-brand div {
   display: grid;
 }
@@ -1631,13 +1618,11 @@ h3,
     min-height: 68px;
   }
 
-  .brand-mark {
-    width: 40px;
-    height: 40px;
-    font-size: 1.15rem;
+  .brand-logo {
+    width: 52px;
+    height: 52px;
   }
 
-  .brand-copy small,
   .cart-button span,
   .cart-button svg {
     display: none;
