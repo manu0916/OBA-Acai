@@ -44,6 +44,13 @@
       <section class="hero" id="inicio">
         <img class="hero-image" src="/hero-acai.webp" alt="Copo de açaí com frutas, granola e creme" />
         <div class="hero-shade"></div>
+        <div class="hero-berries" aria-hidden="true">
+          <span></span><span></span><span></span><span></span><span></span>
+        </div>
+        <div class="hero-mascot" aria-hidden="true">
+          <span class="hero-mascot-bubble">O sabor pousou por aqui!</span>
+          <img src="/tucano-mascote.webp" alt="" />
+        </div>
         <div class="hero-content">
           <span class="eyebrow"><span>★</span> Eleito o melhor açaí de Campos Gerais em 2024</span>
           <h1>Seu momento<br /><em>ficou mais OBA!</em></h1>
@@ -63,26 +70,26 @@
       </section>
 
       <section class="quick-facts" aria-label="Informações rápidas">
-        <article>
+        <article data-reveal>
           <span class="fact-icon" aria-hidden="true">✦</span>
           <div><b>4,8 de 5</b><small>Mais de 550 avaliações</small></div>
         </article>
-        <article>
+        <article data-reveal>
           <span class="fact-icon" aria-hidden="true">◷</span>
           <div><b>40–60 min</b><small>Tempo estimado</small></div>
         </article>
-        <article>
+        <article data-reveal>
           <span class="fact-icon" aria-hidden="true">⌁</span>
           <div><b>Do seu jeito</b><small>Escolha seus adicionais</small></div>
         </article>
-        <article>
+        <article data-reveal>
           <span class="fact-icon" aria-hidden="true">♡</span>
           <div><b>Feito com capricho</b><small>Desde 2020</small></div>
         </article>
       </section>
 
       <section class="menu-section" id="cardapio">
-        <div class="section-heading">
+        <div class="section-heading" data-reveal>
           <div>
             <span class="kicker">Cardápio OBA!</span>
             <h2>O difícil é escolher só um.</h2>
@@ -106,7 +113,7 @@
       </section>
 
       <section class="signature-section" id="sobre">
-        <div class="signature-copy">
+        <div class="signature-copy" data-reveal>
           <span class="kicker light">É daqui. É OBA!</span>
           <h2>Cinco anos servindo bons momentos.</h2>
           <p>
@@ -114,7 +121,7 @@
           </p>
           <a href="https://www.instagram.com/obaacai.cg/" target="_blank" rel="noreferrer">Conheça a OBA! no Instagram <span aria-hidden="true">↗</span></a>
         </div>
-        <div class="signature-stats" aria-label="Destaques da OBA! Açaí">
+        <div class="signature-stats" aria-label="Destaques da OBA! Açaí" data-reveal>
           <article><strong>5</strong><span>anos de<br />história</span></article>
           <article><strong>4,8</strong><span>avaliação<br />dos clientes</span></article>
           <article><strong>2024</strong><span>eleito o melhor<br />de Campos Gerais</span></article>
@@ -122,7 +129,7 @@
       </section>
 
       <section class="location-section" id="localizacao">
-        <div class="location-card">
+        <div class="location-card" data-reveal>
           <span class="kicker">Vem buscar ou pede em casa</span>
           <h2>OBA! Açaí no Centro</h2>
           <p>Rua Simão Martins Ferreira, 751<br />Centro • Campos Gerais, MG • 37160-000</p>
@@ -131,7 +138,7 @@
             <a class="outline-button" href="https://wa.me/5535988363065" target="_blank" rel="noreferrer">Chamar no WhatsApp</a>
           </div>
         </div>
-        <div class="location-art" aria-hidden="true">
+        <div class="location-art" aria-hidden="true" data-reveal>
           <span class="pin">O!</span>
           <span class="road road-one"></span>
           <span class="road road-two"></span>
@@ -153,6 +160,12 @@
         <a href="tel:+5535988363065">Telefone</a>
       </div>
     </footer>
+
+    <button class="mascot-guide" id="mascotGuide" type="button" aria-label="Ouvir uma dica do Tuca, mascote da OBA!">
+      <span class="mascot-guide-message" id="mascotMessage">Oi! Eu sou o Tuca. Posso dar uma dica?</span>
+      <img src="/tucano-mascote.webp" alt="Tuca, o tucano mascote da OBA! Açaí" />
+      <span class="mascot-ping" aria-hidden="true">1</span>
+    </button>
 
     <button class="mobile-cart" id="mobileCart" type="button" hidden>
       <span><b id="mobileCartCount">0</b> itens</span>

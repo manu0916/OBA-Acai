@@ -21,6 +21,13 @@ const extras = [
   "Dadinho",
 ];
 
+const mascotMessages = [
+  "Dica do Tuca: você pode escolher até 3 adicionais.",
+  "Tem açaí zero açúcar e cupuaçu por aqui!",
+  "Montou seu OBA!? A sacola manda tudo direto para o WhatsApp.",
+  "Meu favorito? O que vem bem caprichado!",
+];
+
 const menu = [
   {
     id: "campanha-dia-acai",
@@ -223,7 +230,54 @@ const refs = {
   mobileCartTotal: document.querySelector("#mobileCartTotal"),
   checkoutButton: document.querySelector("#checkoutButton"),
   toast: document.querySelector("#toast"),
+  mascotGuide: document.querySelector("#mascotGuide"),
+  mascotMessage: document.querySelector("#mascotMessage"),
 };
+
+const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+const revealObserver = !prefersReducedMotion && "IntersectionObserver" in window
+  ? new IntersectionObserver(
+      (entries, observer) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          entry.target.classList.add("is-visible");
+          observer.unobserve(entry.target);
+        });
+      },
+      { threshold: 0.12, rootMargin: "0px 0px -35px" },
+    )
+  : null;
+
+function observeReveals(root = document) {
+  const items = root.querySelectorAll("[data-reveal]:not(.is-visible)");
+  if (!revealObserver) {
+    items.forEach((item) => item.classList.add("is-visible"));
+    return;
+  }
+  document.documentElement.classList.add("reveal-ready");
+  items.forEach((item) => revealObserver.observe(item));
+}
+
+let mascotTimer;
+let mascotMessageIndex = 0;
+function makeMascotTalk(message, celebrate = false) {
+  if (!refs.mascotGuide || !refs.mascotMessage) return;
+  window.clearTimeout(mascotTimer);
+  refs.mascotMessage.textContent = message;
+  refs.mascotGuide.classList.add("seen", "is-talking");
+  refs.mascotGuide.classList.toggle("celebrate", celebrate);
+  mascotTimer = window.setTimeout(() => {
+    refs.mascotGuide.classList.remove("is-talking", "celebrate");
+  }, celebrate ? 3200 : 3800);
+}
+
+function bumpCart() {
+  [refs.openCart, refs.mobileCart].forEach((button) => {
+    button.classList.remove("is-bumping");
+    requestAnimationFrame(() => button.classList.add("is-bumping"));
+    window.setTimeout(() => button.classList.remove("is-bumping"), 560);
+  });
+}
 
 function loadCart() {
   try {
@@ -281,10 +335,10 @@ function renderMenu() {
   });
 
   refs.menuGrid.innerHTML = filtered
-    .map((product) => {
+    .map((product, index) => {
       const price = getStartingPrice(product);
       return `
-        <article class="product-card ${product.featured ? "featured" : ""}">
+        <article class="product-card ${product.featured ? "featured" : ""}" data-reveal style="--reveal-delay: ${Math.min(index, 5) * 55}ms">
           <span class="product-badge">${escapeHtml(product.badge)}</span>
           <h3>${escapeHtml(product.name)}</h3>
           <p>${escapeHtml(product.description)}</p>
@@ -302,6 +356,7 @@ function renderMenu() {
     .join("");
 
   refs.emptyState.hidden = filtered.length > 0;
+  observeReveals(refs.menuGrid);
 }
 
 function setCategory(category) {
@@ -401,6 +456,7 @@ function renderCart() {
   refs.mobileCartCount.textContent = String(count);
   refs.mobileCartTotal.textContent = BRL.format(total);
   refs.mobileCart.hidden = count === 0;
+  document.body.classList.toggle("has-cart", count > 0);
   refs.cartEmpty.hidden = count > 0;
   refs.cartSummary.hidden = count === 0;
   refs.cartSubtotal.textContent = BRL.format(total);
@@ -521,6 +577,8 @@ refs.productForm.addEventListener("submit", (event) => {
   renderCart();
   refs.modal.close();
   showToast(`${item.name} foi para a sacola`);
+  bumpCart();
+  makeMascotTalk("Boa escolha! O Tuca aprovou seu pedido.", true);
 });
 
 refs.cartItems.addEventListener("click", (event) => {
@@ -540,6 +598,10 @@ refs.closeEmptyCart.addEventListener("click", () => {
   document.querySelector("#cardapio").scrollIntoView({ behavior: "smooth" });
 });
 refs.checkoutButton.addEventListener("click", checkout);
+refs.mascotGuide?.addEventListener("click", () => {
+  makeMascotTalk(mascotMessages[mascotMessageIndex]);
+  mascotMessageIndex = (mascotMessageIndex + 1) % mascotMessages.length;
+});
 
 document.addEventListener("keydown", (event) => {
   if (event.key === "Escape" && refs.drawer.classList.contains("open")) closeCart();
@@ -548,3 +610,5 @@ document.addEventListener("keydown", (event) => {
 renderCategories();
 renderMenu();
 renderCart();
+observeReveals();
+window.setTimeout(() => makeMascotTalk("Oi! Eu sou o Tuca. Posso dar uma dica?"), 1400);
