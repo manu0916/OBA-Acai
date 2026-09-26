@@ -300,25 +300,6 @@ h3,
   animation: mascot-float 4.6s 900ms ease-in-out infinite;
 }
 
-.hero-mascot-bubble {
-  position: absolute;
-  z-index: 2;
-  top: 4%;
-  left: -34%;
-  max-width: 190px;
-  padding: 10px 15px;
-  color: var(--purple-950);
-  background: var(--yellow);
-  border: 2px solid var(--purple-950);
-  border-radius: 18px 18px 4px 18px;
-  font-family: "Baloo 2", sans-serif;
-  font-size: 0.92rem;
-  font-weight: 800;
-  line-height: 1.1;
-  box-shadow: 5px 6px 0 rgba(44, 8, 47, 0.34);
-  animation: bubble-bob 3.5s 1.2s ease-in-out infinite;
-}
-
 .hero-content {
   width: var(--page);
   margin: 0 auto;
@@ -847,6 +828,25 @@ h3,
   line-height: 1.35;
 }
 
+.signature-copy,
+.signature-stats {
+  position: relative;
+  z-index: 2;
+}
+
+.signature-mascot {
+  position: absolute;
+  z-index: 1;
+  right: -24px;
+  bottom: -46px;
+  width: clamp(150px, 15vw, 220px);
+  opacity: 0.72;
+  pointer-events: none;
+  filter: drop-shadow(0 18px 20px rgba(23, 2, 26, 0.32));
+  transform-origin: 50% 90%;
+  animation: mascot-perch 5.8s ease-in-out infinite;
+}
+
 .location-section {
   width: var(--page);
   margin: 100px auto;
@@ -937,6 +937,18 @@ h3,
 
 .location-art small {
   color: rgba(255,255,255,.75);
+}
+
+.location-mascot {
+  position: absolute;
+  z-index: 4;
+  left: -16px;
+  bottom: -28px;
+  width: clamp(120px, 13vw, 180px);
+  pointer-events: none;
+  filter: drop-shadow(0 15px 18px rgba(67, 16, 71, 0.28));
+  transform-origin: 48% 88%;
+  animation: mascot-perch 5.2s -2s ease-in-out infinite;
 }
 
 .road {
@@ -1500,87 +1512,6 @@ h3,
   animation: cart-pop 520ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.mascot-guide {
-  position: fixed;
-  z-index: 45;
-  right: 22px;
-  bottom: 20px;
-  width: 92px;
-  height: 100px;
-  padding: 0;
-  background: transparent;
-  border: 0;
-  cursor: pointer;
-  filter: drop-shadow(0 13px 16px rgba(44, 8, 47, 0.25));
-}
-
-.mascot-guide img {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-  transform-origin: 48% 86%;
-  animation: tuca-peek 4.8s ease-in-out infinite;
-}
-
-.mascot-guide-message {
-  position: absolute;
-  right: 72px;
-  bottom: 70px;
-  width: 220px;
-  padding: 12px 15px;
-  color: var(--purple-950);
-  background: var(--white);
-  border: 2px solid var(--purple-800);
-  border-radius: 18px 18px 4px 18px;
-  font-family: "Baloo 2", sans-serif;
-  font-size: 0.9rem;
-  font-weight: 800;
-  line-height: 1.25;
-  text-align: left;
-  box-shadow: 5px 6px 0 var(--yellow), var(--shadow);
-  opacity: 0;
-  pointer-events: none;
-  transform: translate(12px, 8px) scale(0.88);
-  transform-origin: right bottom;
-  transition: opacity 180ms ease, transform 220ms cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.mascot-guide.is-talking .mascot-guide-message {
-  opacity: 1;
-  transform: translate(0, 0) scale(1);
-}
-
-.mascot-guide.celebrate img {
-  animation: tuca-celebrate 720ms cubic-bezier(0.34, 1.56, 0.64, 1);
-}
-
-.mascot-ping {
-  position: absolute;
-  top: 4px;
-  right: 2px;
-  width: 25px;
-  height: 25px;
-  display: grid;
-  place-items: center;
-  color: var(--purple-950);
-  background: var(--yellow);
-  border: 2px solid var(--purple-950);
-  border-radius: 50%;
-  font-size: 0.72rem;
-  font-weight: 900;
-  animation: ping-pulse 1.8s ease-in-out infinite;
-}
-
-.mascot-guide.seen .mascot-ping {
-  display: none;
-}
-
-.mascot-guide:focus-visible {
-  outline: 4px solid var(--yellow);
-  outline-offset: 3px;
-  border-radius: 30px;
-}
-
 @keyframes mascot-arrive {
   from { opacity: 0; transform: translate(150px, -70px) rotate(12deg) scale(0.7); }
   to { opacity: 1; transform: translate(0, 0) rotate(0) scale(1); }
@@ -1591,32 +1522,14 @@ h3,
   50% { transform: translateY(-13px) rotate(1.5deg); }
 }
 
-@keyframes bubble-bob {
-  0%, 100% { transform: translateY(0) rotate(-2deg); }
-  50% { transform: translateY(-7px) rotate(1deg); }
-}
-
 @keyframes berry-drift {
   0%, 100% { transform: translateY(0) scale(1); opacity: 0.65; }
   50% { transform: translateY(-22px) scale(1.12); opacity: 1; }
 }
 
-@keyframes tuca-peek {
-  0%, 72%, 100% { transform: translateY(5px) rotate(0); }
-  78% { transform: translateY(-4px) rotate(-4deg); }
-  84% { transform: translateY(0) rotate(4deg); }
-  90% { transform: translateY(-3px) rotate(-2deg); }
-}
-
-@keyframes tuca-celebrate {
-  0%, 100% { transform: translateY(0) rotate(0) scale(1); }
-  35% { transform: translateY(-18px) rotate(-8deg) scale(1.08); }
-  68% { transform: translateY(-4px) rotate(7deg) scale(1.03); }
-}
-
-@keyframes ping-pulse {
-  0%, 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255, 216, 77, 0.4); }
-  50% { transform: scale(1.08); box-shadow: 0 0 0 8px rgba(255, 216, 77, 0); }
+@keyframes mascot-perch {
+  0%, 100% { transform: translateY(0) rotate(-1deg); }
+  50% { transform: translateY(-9px) rotate(2deg); }
 }
 
 @keyframes cart-pop {
@@ -1658,12 +1571,6 @@ h3,
     width: clamp(180px, 24vw, 235px);
   }
 
-  .hero-mascot-bubble {
-    left: -42%;
-    max-width: 160px;
-    font-size: 0.8rem;
-  }
-
   .quick-facts {
     grid-template-columns: repeat(2, 1fr);
   }
@@ -1685,12 +1592,21 @@ h3,
     gap: 42px;
   }
 
+  .signature-mascot {
+    width: 170px;
+    opacity: 0.48;
+  }
+
   .location-section {
     grid-template-columns: 1fr;
   }
 
   .location-art {
     min-height: 310px;
+  }
+
+  .location-mascot {
+    width: 145px;
   }
 
   .site-footer {
@@ -1802,14 +1718,6 @@ h3,
     width: 158px;
   }
 
-  .hero-mascot-bubble {
-    top: 0;
-    left: -56%;
-    max-width: 128px;
-    padding: 8px 10px;
-    font-size: 0.68rem;
-  }
-
   .hero-berries span:nth-child(2),
   .hero-berries span:nth-child(3) {
     display: none;
@@ -1879,6 +1787,14 @@ h3,
     padding: 72px 20px;
   }
 
+  .signature-mascot {
+    top: 18px;
+    right: -34px;
+    bottom: auto;
+    width: 120px;
+    opacity: 0.3;
+  }
+
   .signature-stats {
     grid-template-columns: 1fr;
     padding: 0;
@@ -1925,6 +1841,12 @@ h3,
 
   .location-art {
     min-height: 270px;
+  }
+
+  .location-mascot {
+    left: -18px;
+    bottom: -20px;
+    width: 112px;
   }
 
   .site-footer {
@@ -1997,30 +1919,6 @@ h3,
     bottom: 86px;
   }
 
-  .mascot-guide {
-    right: 8px;
-    bottom: 10px;
-    width: 74px;
-    height: 82px;
-  }
-
-  body.has-cart .mascot-guide {
-    bottom: 80px;
-  }
-
-  .mascot-guide-message {
-    right: 58px;
-    bottom: 56px;
-    width: min(205px, calc(100vw - 105px));
-    padding: 10px 12px;
-    font-size: 0.8rem;
-  }
-
-  .mascot-ping {
-    width: 22px;
-    height: 22px;
-    font-size: 0.66rem;
-  }
 }
 
 @media (prefers-reduced-motion: reduce) {
